@@ -76,10 +76,10 @@ def run_simulation(particle, materials, amount_simulated=1, detail=False):
         angles.append(angle)
 
     mean = statistics.fmean(angles)
-    absolutes_mean = statistics.fmean([abs(angle) for angle in angles]) # mean of absolutes, not absolute mean
+    absolute_mean = np.sqrt(statistics.fmean([angle**2 for angle in angles]))
 
     print(f"Mean angle: {mean}")
-    print(f"Absolute value mean: {absolutes_mean}")
+    print(f"Absolute value mean: {absolute_mean}")
     print()
 
 
