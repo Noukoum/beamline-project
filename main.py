@@ -97,13 +97,13 @@ def main():
                         atomic_number=13,
                         atomic_mass=26.9815385,
                         radiation_length=8.897,
-                        thickness=2)
+                        thickness=1)
 
     lead = Material(name="Lead",
                     atomic_number=82,
                     atomic_mass=207.2,
                     radiation_length=0.5612,
-                    thickness=2)
+                    thickness=1)
 
     amount_to_simulate = int(input("How many particles should be simulated? "))
 
