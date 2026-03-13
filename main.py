@@ -62,7 +62,7 @@ def run_simulation(particle, materials, amount_simulated=1, detail=False):
     variance = calculate_variance(particle, materials)
     standard_deviation = np.sqrt(variance)
 
-    print(f"Materials: {", ".join([material.name for material in materials])}")
+    print(f"Materials: {', '.join([material.name for material in materials])}")
     print(f"Total thickness: {sum([material.thickness for material in materials])}")
     print(f"Variance: {variance}")
     print(f"Standard deviation:  {standard_deviation}")
