@@ -43,11 +43,13 @@ def calculate_variance(particle: Muon, materials: list[Material]):
 
     return outer_part**2 * sum
 
-def run_simulation(particle, materials, amount_simulated=1, detail=False):
+def run_simulation(particle, materials, amount_to_simulate=1, detail=False, simulation_number=0, write=True):
     if detail:
         for material in materials:
             variance = calculate_variance(particle, [material])
             deviation = np.sqrt(variance)
+
+
             print(f"--- {material.name} ---")
             print(f"Atomic Number: {material.atomic_number}")
             print(f"Thickness: {material.thickness}")
@@ -68,21 +70,25 @@ def run_simulation(particle, materials, amount_simulated=1, detail=False):
     print(f"Standard deviation:  {standard_deviation}")
     print()
 
-    print(f"--- Simulation of {amount_simulated} particles ---")
+    print(f"--- Simulation of {amount_to_simulate} particles ---")
 
-    angles = list()
-    for i in range(amount_simulated):
-        angle = np.random.normal(0, standard_deviation)
-        angles.append(angle)
+    output_file_name = "simulation_output_"
+
+    with open(f"{output_file_name}{simulation_number}.txt", "w") as file:
+        angles = list()
+        for i in range(amount_to_simulate):
+            angle = np.random.normal(0, standard_deviation)
+            angles.append(angle)
+
+            if write:
+                file.write(f"{angle}\n")
 
     mean = statistics.fmean(angles)
     absolute_mean = np.sqrt(statistics.fmean([angle**2 for angle in angles]))
 
     print(f"Mean angle: {mean}")
-    print(f"Absolute value mean: {absolute_mean}")
+    print(f"Absolute mean: {absolute_mean}")
     print()
-
-
 
 def main():
     particle = Muon()
@@ -99,15 +105,15 @@ def main():
                     radiation_length=0.5612,
                     thickness=2)
 
-    amount_simulated = int(input("How many particles should be simulated? "))
+    amount_to_simulate = int(input("How many particles should be simulated? "))
 
-    if amount_simulated < 1:
+    if amount_to_simulate < 1:
         raise ValueError("At least one particle must be simulated.")
-    if type(amount_simulated) != type(int()):
+    if type(amount_to_simulate) != type(int()):
         raise TypeError("Amount must be an integer.")
 
-    run_simulation(particle, [aluminum, lead, aluminum], amount_simulated)
-    run_simulation(particle, [aluminum, aluminum, aluminum], amount_simulated)
+    run_simulation(particle, [aluminum, lead, aluminum], amount_to_simulate, simulation_number=0)
+    run_simulation(particle, [aluminum, aluminum, aluminum], amount_to_simulate, simulation_number=1)
 
 
 if __name__ == "__main__":
