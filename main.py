@@ -112,8 +112,8 @@ def main():
     if type(amount_to_simulate) != type(int()):
         raise TypeError("Amount must be an integer.")
 
-    run_simulation(particle, [aluminum, lead, aluminum], amount_to_simulate, simulation_number=0)
-    run_simulation(particle, [aluminum, aluminum, aluminum], amount_to_simulate, simulation_number=1)
+    run_simulation(particle, [aluminum, lead, aluminum], amount_to_simulate, simulation_number=2)
+    run_simulation(particle, [aluminum, aluminum, aluminum], amount_to_simulate, simulation_number=3)
 
 
 if __name__ == "__main__":
